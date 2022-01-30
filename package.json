@@ -7,6 +7,7 @@
         "build:dist": "NODE_ENV=production yarn run build"
     },
     "dependencies": {
+        "axios": "^0.25.0",
         "clipcc-extension": "^0.1.7"
     },
     "devDependencies": {

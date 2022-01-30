@@ -1,6 +1,9 @@
 {
     "clipteam.http.name": "HTTP",
     "clipteam.http.description": "Feel the charm of Internet!",
-    "clipteam.http.category": "Hello",
-    "clipteam.http.hello": "say helo"
+    "clipteam.http.category": "HTTP",
+    "clipteam.http.setUA": "set User-Agent to [UA]",
+    "clipteam.http.setHeader": "set Header to [VALUE]",
+    "clipteam.http.get": "GET [URL]",
+    "clipteam.http.post": "POST [URL] with [DATA]"
 }
