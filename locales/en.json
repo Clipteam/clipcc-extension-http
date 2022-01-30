@@ -4,6 +4,7 @@
     "clipteam.http.category": "HTTP",
     "clipteam.http.setUA": "set User-Agent to [UA]",
     "clipteam.http.setHeader": "set Header to [VALUE]",
+    "clipteam.http.setHeaderByKey": "set Header by [KEY] to [VALUE]",
     "clipteam.http.get": "GET [URL]",
     "clipteam.http.post": "POST [URL] with [DATA]"
 }

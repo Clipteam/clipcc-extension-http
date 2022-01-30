@@ -1,0 +1,10 @@
+{
+    "clipteam.http.name": "HTTP",
+    "clipteam.http.description": "感受互联网的魅力!",
+    "clipteam.http.category": "HTTP",
+    "clipteam.http.setUA": "设置 User-Agent 为 [UA]",
+    "clipteam.http.setHeader": "设置 Header 为 [VALUE]",
+    "clipteam.http.setHeaderByKey": "设置 Header 中的 [KEY] 为 [VALUE]",
+    "clipteam.http.get": "GET [URL]",
+    "clipteam.http.post": "带着数据 [DATA] POST [URL]"
+}

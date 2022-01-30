@@ -9,7 +9,7 @@ class HTTPExtension extends Extension {
             timeout: 10000,
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+                // "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
             }
         });
 
@@ -45,6 +45,23 @@ class HTTPExtension extends Extension {
             function: (args) => this.setHeader(args),
         });
         api.addBlock({
+            opcode: 'clipteam.http.setHeaderByKey',
+            type: type.BlockType.COMMAND,
+            messageId: 'clipteam.http.setHeaderByKey',
+            categoryId: 'clipteam.http.category',
+            param: {
+                KEY: {
+                    type: type.ParameterType.STRING,
+                    default: ' '
+                },
+                VALUE: {
+                    type: type.ParameterType.STRING,
+                    default: ' '
+                }
+            },
+            function: (args) => this.setHeaderByKey(args),
+        });
+        api.addBlock({
             opcode: 'clipteam.http.get',
             type: type.BlockType.REPORTER,
             messageId: 'clipteam.http.get',
@@ -76,6 +93,11 @@ class HTTPExtension extends Extension {
         });
     }
 
+    onUninit () {
+        console.log('HTTP Extension Uninitialized!');
+        api.removeCategory('clipteam.http.category');
+    }
+
     setUA (args) {
         this.instance.defaults.headers['User-Agent'] = args.UA;
     }
@@ -84,10 +106,16 @@ class HTTPExtension extends Extension {
         this.instance.defaults.header = JSON.parse(args.VALUE);
     }
 
+    setHeaderByKey (args) {
+        this.instance.defaults.headers[args.KEY] = args.VALUE;
+    }
+
     async get (args) {
         try {
+            // It's stuck here for unknown reason.
             const raw = await this.instance.get(args.URL);
-            return JSON.parse(raw);
+            if (typeof raw === 'object') return JSON.parse(raw.data);
+            return raw.data;
         } catch (e) {
             return "[ERROR]" + e.message;
         }
@@ -96,7 +124,7 @@ class HTTPExtension extends Extension {
     async post (args) {
         try {
             const raw = await this.instance.post(args.URL, JSON.parse(args.DATA));
-            return JSON.parse(raw);
+            return JSON.parse(raw.data);
         } catch (e) {
             return "[ERROR]" + e.message;
         }
